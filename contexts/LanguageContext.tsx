@@ -15,7 +15,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguage] = useState<Language>('ja')
 
   const t = (key: TranslationKey, replacements?: Record<string, string | number>): string => {
-    let text = translations[language][key] || key
+    let text: string = translations[language][key] as string || key
     
     if (replacements) {
       Object.entries(replacements).forEach(([placeholder, value]) => {
