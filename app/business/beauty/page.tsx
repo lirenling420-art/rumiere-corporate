@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 
 // Hot Pepper Beauty URL（後で差し替え可能）
-const HOT_PEPPER_BEAUTY_URL = 'https://beauty.hotpepper.jp'
+const HOT_PEPPER_BEAUTY_URL = 'http://b.hpr.jp/kr/hp/H000641049'
 
 export default function BeautyPage() {
   const [expandedService, setExpandedService] = useState<string | null>('salon')

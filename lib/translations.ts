@@ -60,6 +60,15 @@ export const translations = {
     'cta.desc': '株式会社ルミエールへのお問い合わせ、ご相談はいつでもお受けしています',
     'cta.button': 'お問い合わせ',
 
+    // Contact Page - Access
+    'contact.access.title': 'アクセス',
+    'contact.access.by_car': 'お車でお越しの場合',
+    'contact.access.by_car_desc': '豊田市中心部から車で約15分。敷地周辺に駐車スペースのご案内が可能です。カーナビに住所をご入力いただくか、お問い合わせ時に詳細な道順をご案内いたします。',
+    'contact.access.by_train': '公共交通機関をご利用の場合',
+    'contact.access.by_train_desc': '名鉄「豊田市駅」で下車後、東口へお進みください。東口バスターミナルより、とよたおいでんバス「土橋・豊田東環状線（五ヶ丘小学校前経由）」にご乗車ください。「香九礼橋」バス停にて下車（乗車時間：約12分）、バス停より徒歩約4分で当社に到着いたします。',
+    'contact.access.landmarks': '周辺の目印',
+    'contact.access.landmarks_desc': '詳細な道順や周辺の目印についてはお問い合わせ時にご案内いたします。Google Map でも住所検索が可能です。',
+
     // Footer
     'footer.company': '株式会社ルミエール',
     'footer.desc': '美容・サロン、小売・ライフスタイル、交通・物流など、多角的な事業を展開しています。',
@@ -129,6 +138,15 @@ export const translations = {
     'cta.desc': 'We are always ready to receive inquiries and consultations from Rumiere',
     'cta.button': 'Contact Us',
 
+    // Contact Page - Access
+    'contact.access.title': 'Access',
+    'contact.access.by_car': 'By Car',
+    'contact.access.by_car_desc': 'About 15 minutes by car from Toyota city center. Parking spaces are available around the premises. Please enter the address into your car navigation or contact us for detailed directions.',
+    'contact.access.by_train': 'By Public Transportation',
+    'contact.access.by_train_desc': 'Get off at Meitetsu "Toyota-shi Station" and head to the East Exit. From the East Exit Bus Terminal, take the Toyota Oiden Bus "Tsuchihashi/Toyota East Ring Line (via Gokagiri Elementary School)" bus. Get off at "Koukuri Bridge" bus stop (approximately 12 minutes by bus), and it is about 4 minutes walk from the bus stop to our company.',
+    'contact.access.landmarks': 'Landmarks',
+    'contact.access.landmarks_desc': 'We will provide detailed directions and landmarks information when you contact us. You can also search by address on Google Map.',
+
     // Footer
     'footer.company': 'Rumiere Co., Ltd.',
     'footer.desc': 'We operate diverse businesses including beauty salons, retail and lifestyle, transportation and logistics.',
@@ -197,6 +215,15 @@ export const translations = {
     'cta.subtitle': '欢迎随时联系我们',
     'cta.desc': '我们随时准备接收来自株式会社ルミエール的咨询',
     'cta.button': '联系我们',
+
+    // Contact Page - Access
+    'contact.access.title': '交通方式',
+    'contact.access.by_car': '自驾车',
+    'contact.access.by_car_desc': '从丰田市中心驾车约15分钟。公司周边有停车位。请在导航中输入地址或联系我们获取详细路线。',
+    'contact.access.by_train': '公共交通',
+    'contact.access.by_train_desc': '在名铁"丰田市站"下车，前往东口。从东口巴士总站乘坐丰田乘车巴士"土桥·丰田东环线（经五ヶ丘小学校前）"。在"香九礼桥"巴士站下车（乘车时间：约12分钟），从巴士站步行约4分钟即可到达我公司。',
+    'contact.access.landmarks': '周边标志',
+    'contact.access.landmarks_desc': '详细路线和周边标志信息将在您联系我们时提供。您也可以在Google地图上搜索地址。',
 
     // Footer
     'footer.company': '株式会社ルミエール',

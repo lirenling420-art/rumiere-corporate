@@ -32,7 +32,7 @@ export default function CompanyPage() {
                   </div>
                   <div>
                     <p className="text-sm text-soft-gray font-medium mb-2">所在地</p>
-                    <p className="text-lg text-charcoal">東京都渋谷区</p>
+                    <p className="text-lg text-charcoal">愛知県豊田市</p>
                   </div>
                 </div>
               </div>
