@@ -1,7 +1,8 @@
 'use client'
 
-import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { Phone, Mail, MapPin, Car, Train, Navigation } from 'lucide-react'
 
@@ -10,11 +11,13 @@ const COMPANY_ADDRESS = '愛知県豊田市宝来町四丁目755番地85'
 const COMPANY_PHONE = '080-4842-1777'
 const COMPANY_EMAIL = 'ryoko_2036@yahoo.co.jp'
 const GOOGLE_MAP_EMBED_URL = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3268.5!2d137.1!3d35.08!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60037d0d0d0d0d0d%3A0x0!2z5oSb5ric5biC5Y2X5bGx5Yy65Y2X5bGx!5e0!3m2!1sja!2sjp!4v1234567890'
-const LINE_QR_IMAGE = '/images/line-qr-placeholder.png'
-const WECHAT_QR_IMAGE = '/images/wechat-qr-placeholder.png'
+const LINE_QR_IMAGE = '/images/line-qr.jpg'
+const WECHAT_QR_IMAGE = '/images/wechat-qr.png'
 
 export default function ContactPage() {
   const { t } = useLanguage()
+  const [lineQrError, setLineQrError] = useState(false)
+  const [wechatQrError, setWechatQrError] = useState(false)
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -211,6 +214,101 @@ export default function ContactPage() {
               </div>
             </motion.div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* QR Contact Section */}
+      <section className="py-24 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-charcoal mb-4">
+              LINE / WeChat お問い合わせ
+            </h2>
+            <div className="w-16 h-1 bg-gold mx-auto mb-6"></div>
+            <p className="text-charcoal/80 font-light">
+              QRコードを読み取ってお問い合わせください
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="rounded-2xl border border-gray-100 bg-white p-8 md:p-10 shadow-sm"
+            >
+              <div className="space-y-6">
+                <h3 className="text-2xl font-serif font-bold text-center text-charcoal">
+                  LINEでのお問い合わせ
+                </h3>
+
+                <div className="mx-auto w-56 h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-xl border border-gray-100 bg-white overflow-hidden">
+                  {!lineQrError ? (
+                    <div className="relative h-full w-full">
+                      <Image
+                        src={LINE_QR_IMAGE}
+                        alt="LINE QRコード"
+                        fill
+                        className="object-cover object-[50%_58%]"
+                        sizes="(max-width: 768px) 224px, (max-width: 1024px) 256px, 288px"
+                        onError={() => setLineQrError(true)}
+                      />
+                    </div>
+                  ) : (
+                    <div className="h-full w-full flex items-center justify-center text-soft-gray text-sm bg-white">
+                      QR画像準備中
+                    </div>
+                  )}
+                </div>
+
+                <p className="text-center text-sm text-charcoal/80 font-light leading-relaxed">
+                  QRコードを読み取って、LINEからお気軽にお問い合わせください。
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="rounded-2xl border border-gray-100 bg-white p-8 md:p-10 shadow-sm"
+            >
+              <div className="space-y-6">
+                <h3 className="text-2xl font-serif font-bold text-center text-charcoal">
+                  WeChatでのお問い合わせ
+                </h3>
+
+                <div className="mx-auto w-56 h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-xl border border-gray-100 bg-white p-3 flex items-center justify-center">
+                  {!wechatQrError ? (
+                    <Image
+                      src={WECHAT_QR_IMAGE}
+                      alt="WeChat QRコード"
+                      width={320}
+                      height={320}
+                      className="w-full h-full object-contain"
+                      onError={() => setWechatQrError(true)}
+                    />
+                  ) : (
+                    <div className="h-full w-full flex items-center justify-center text-soft-gray text-sm bg-white">
+                      QR画像準備中
+                    </div>
+                  )}
+                </div>
+
+                <p className="text-center text-sm text-charcoal/80 font-light leading-relaxed">
+                  QRコードを読み取って、WeChatからお気軽にお問い合わせいただけます。
+                </p>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
     </div>

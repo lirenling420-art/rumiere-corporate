@@ -2,18 +2,26 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { MapPin } from 'lucide-react'
+import SalonImageCarousel from '@/components/SalonImageCarousel'
 
 // Hot Pepper Beauty URL（後で差し替え可能）
 const HOT_PEPPER_BEAUTY_URL = 'http://b.hpr.jp/kr/hp/H000641049'
 
+const SALON_IMAGES = [
+  '/images/salon-1.jpg',
+  '/images/salon-2.jpg',
+  '/images/salon-3.jpg',
+]
+
 export default function BeautyPage() {
-  const [expandedService, setExpandedService] = useState<string | null>('salon')
+  const [expandedService, setExpandedService] = useState<string | null>('nail')
 
   const salonServices = [
     {
       id: 'nail',
       title: 'ネイルサロン',
-      description: '最新のネイルアート技術と、厳選されたカラーやデザインで、指先から美しさを引き出します。',
+      description: '上質な空間と丁寧な施術で、ネイルとエステの両面から美しさをサポートします。落ち着いた空間で、お客様一人ひとりに合わせたサービスをご提供しています。',
       details: [
         'トレンドネイルアート',
         'ジェルネイル',
@@ -21,6 +29,11 @@ export default function BeautyPage() {
         'ネイルケア',
         'カラーリング',
       ],
+      store: {
+        name: 'Beauty Salon Ryoko ネイル＆エステ',
+        address: '愛知県豊田市西町1-90 西町九丸貸店舗1F2号室',
+        imageSrc: '/images/beauty-salon-ryoko.jpg',
+      },
       icon: '💅',
       cta: {
         text: 'Hot Pepper Beautyで見る',
@@ -152,6 +165,32 @@ export default function BeautyPage() {
 
                 {expandedService === service.id && (
                   <div className="p-8 bg-white border-t border-light-gray">
+                    {service.id === 'nail' && service.store && (
+                      <div className="mb-10 rounded-2xl border border-light-gray bg-gradient-to-br from-white to-beige/40 p-6 shadow-sm">
+                        <p className="text-xs tracking-[0.18em] uppercase text-soft-gray mb-3">Salon Information</p>
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                          <div className="relative rounded-xl overflow-hidden border border-light-gray bg-white min-h-[320px] shadow-sm">
+                            <SalonImageCarousel images={SALON_IMAGES} intervalMs={4200} />
+                          </div>
+
+                          <div>
+                            <h4 className="text-3xl font-serif font-bold text-charcoal leading-tight mb-5">
+                              {service.store.name}
+                            </h4>
+                            <div className="flex items-start gap-3 mb-5">
+                              <MapPin className="w-5 h-5 text-gold mt-1" strokeWidth={1.6} />
+                              <p className="text-charcoal text-base leading-relaxed">
+                                {service.store.address}
+                              </p>
+                            </div>
+                            <p className="text-charcoal/85 leading-relaxed mb-6">
+                              {service.description}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
                     <div className="mb-6">
                       <h4 className="text-lg font-serif font-bold text-charcoal mb-4">
                         提供サービス
