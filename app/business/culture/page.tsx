@@ -1,308 +1,63 @@
-import Link from 'next/link'
+'use client'
+
+import BusinessDetailPage from '@/components/BusinessDetailPage'
+import { useLanguage, LanguageContent } from '@/contexts/LanguageContext'
+
+const CULTURE_CONTENT: LanguageContent<Parameters<typeof BusinessDetailPage>[0]['content']> = {
+  ja: {
+    heroTitle: '文化・教育関連事業', heroSubtitle: '芸術と文化を通じて、人々の創造性と感性を育みます', heroGradient: 'from-purple-100 via-cream to-violet-100',
+    overview: ['文化・教育関連事業では、絵画教室と彫刻教室の運営を通じて、芸術と文化の価値を社会に発信しています。','初心者から上級者まで、すべての方が芸術の喜びを感じ、創造性を発揮できる環境を提供することで、人々の心豊かな生活と文化的な成長に貢献しています。'],
+    servicesLabel: '教室の特徴',
+    services: [
+      { title: '絵画教室', description: '初心者から上級者まで、個人のレベルに合わせた絵画指導を行います。', points: ['基礎から応用まで', '個別指導対応', '少人数クラス', '展示会への参加', 'アート鑑賞'], icon: '🎨' },
+      { title: '彫刻教室', description: '彫刻の基礎技法から創作まで、段階的に学べる教室です。', points: ['基本技法の習得', '素材の選択', '作品制作', '展示会への参加', 'アート交流'], icon: '🗿' },
+    ],
+    featureTitle: 'プログラムと活動',
+    featureItems: [
+      { title: '定期クラス', description: '週1回から複数回まで、ご自身のペースで学べる定期クラスを開設しています。' },
+      { title: 'ワークショップ', description: '特定のテーマや技法に焦点を当てた、短期集中ワークショップを開催しています。' },
+      { title: '展示会', description: '生徒の作品を展示する展示会を定期的に開催し、成果を発表する機会を提供しています。' },
+      { title: 'アート鑑賞', description: '美術館やギャラリーへの訪問、著名アーティストの作品鑑賞を通じて、芸術への理解を深めています。' },
+    ],
+    ctaTitle: 'ご質問やご相談はお気軽に', ctaButton: 'お問い合わせ',
+  },
+  en: {
+    heroTitle: 'Culture & Education Business', heroSubtitle: 'Nurturing creativity and sensitivity through art and culture.', heroGradient: 'from-purple-100 via-cream to-violet-100',
+    overview: ['Through painting and sculpture classes, we share the value of art and culture with society.','By providing an environment where everyone from beginners to advanced learners can enjoy art and express creativity, we contribute to richer lives and cultural growth.'],
+    servicesLabel: 'Class Features',
+    services: [
+      { title: 'Painting Class', description: 'We provide painting instruction suited to each learner’s level, from beginner to advanced.', points: ['From basics to advanced', 'Individual guidance', 'Small classes', 'Exhibition participation', 'Art appreciation'], icon: '🎨' },
+      { title: 'Sculpture Class', description: 'A step-by-step class covering everything from basic sculpture techniques to creative work.', points: ['Basic techniques', 'Material selection', 'Artwork creation', 'Exhibition participation', 'Art exchange'], icon: '🗿' },
+    ],
+    featureTitle: 'Programs and Activities',
+    featureItems: [
+      { title: 'Regular Classes', description: 'Regular classes are available from once a week to multiple times, allowing each participant to learn at their own pace.' },
+      { title: 'Workshops', description: 'We hold intensive short-term workshops focused on specific themes and techniques.' },
+      { title: 'Exhibitions', description: 'We regularly hold exhibitions to showcase students’ work and provide opportunities to present results.' },
+      { title: 'Art Appreciation', description: 'Visits to museums and galleries help deepen understanding of art.' },
+    ],
+    ctaTitle: 'Questions or inquiries are always welcome.', ctaButton: 'Contact Us',
+  },
+  zh: {
+    heroTitle: '文化与教育相关业务', heroSubtitle: '通过艺术与文化，培养人们的创造力与感性。', heroGradient: 'from-purple-100 via-cream to-violet-100',
+    overview: ['我们通过绘画与雕塑课程的运营，向社会传播艺术与文化的价值。','通过提供让初学者到进阶者都能感受艺术乐趣并发挥创造力的环境，我们为更丰盈的生活和文化成长作出贡献。'],
+    servicesLabel: '课程特色',
+    services: [
+      { title: '绘画教室', description: '面向从初学者到进阶者的各层次学员，提供符合个人水平的绘画指导。', points: ['从基础到进阶', '支持个别指导', '小班授课', '参加展览', '艺术鉴赏'], icon: '🎨' },
+      { title: '雕塑教室', description: '从雕塑基础技法到创作，分阶段学习的课程。', points: ['掌握基础技法', '材料选择', '作品创作', '参加展览', '艺术交流'], icon: '🗿' },
+    ],
+    featureTitle: '项目与活动',
+    featureItems: [
+      { title: '定期课程', description: '开设每周1次到多次不等、可按个人节奏学习的定期课程。' },
+      { title: '工作坊', description: '举办聚焦特定主题与技法的短期集中工作坊。' },
+      { title: '展览会', description: '定期举办学员作品展，为成果展示提供机会。' },
+      { title: '艺术鉴赏', description: '通过参观美术馆和画廊，加深对艺术的理解。' },
+    ],
+    ctaTitle: '如有疑问或咨询，欢迎随时联系我们。', ctaButton: '联系我们',
+  },
+}
 
 export default function CulturePage() {
-  const programs = [
-    {
-      title: '絵画教室',
-      description: '初心者から上級者まで、個人のレベルに合わせた絵画指導を行います。',
-      details: [
-        '基礎から応用まで',
-        '個別指導対応',
-        '少人数クラス',
-        '展示会への参加',
-        'アート鑑賞',
-      ],
-      icon: '🎨',
-      techniques: ['油絵', 'アクリル画', '水彩画', 'デッサン'],
-    },
-    {
-      title: '彫刻教室',
-      description: '彫刻の基礎技法から創作まで、段階的に学べる教室です。',
-      details: [
-        '基本技法の習得',
-        '素材の選択',
-        '作品制作',
-        '展示会への参加',
-        'アート交流',
-      ],
-      icon: '🗿',
-      techniques: ['木彫', '石彫', '粘土造形', 'モダン彫刻'],
-    },
-  ]
-
-  return (
-    <div className="bg-cream">
-      {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-purple-100 via-cream to-violet-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-5xl md:text-6xl font-serif font-bold text-charcoal mb-4">
-              文化・教育関連事業
-            </h1>
-            <div className="w-16 h-1 bg-gold mx-auto mb-6"></div>
-            <p className="text-xl text-charcoal">
-              芸術と文化を通じて、人々の創造性と感性を育みます
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Overview Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-          <p className="text-lg text-charcoal leading-relaxed">
-            文化・教育関連事業では、絵画教室と彫刻教室の運営を通じて、芸術と文化の価値を社会に発信しています。
-          </p>
-          <p className="text-lg text-charcoal leading-relaxed mt-6">
-            初心者から上級者まで、すべての方が芸術の喜びを感じ、創造性を発揮できる環境を提供することで、人々の心豊かな生活と文化的な成長に貢献しています。
-          </p>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-12">
-            {programs.map((program, idx) => (
-              <div
-                key={idx}
-                className="bg-gradient-to-r from-beige to-cream rounded-lg overflow-hidden border border-light-gray hover:border-gold transition-colors hover:shadow-lg"
-              >
-                <div className="p-8">
-                  <div className="flex items-start gap-6 mb-6">
-                    <div className="text-5xl flex-shrink-0">{program.icon}</div>
-                    <div className="flex-grow">
-                      <h3 className="text-3xl font-serif font-bold text-charcoal mb-3">
-                        {program.title}
-                      </h3>
-                      <p className="text-lg text-charcoal leading-relaxed">
-                        {program.description}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-                    <div>
-                      <h4 className="text-lg font-serif font-bold text-charcoal mb-4">
-                        教室の特徴
-                      </h4>
-                      <div className="space-y-3">
-                        {program.details.map((detail, detailIdx) => (
-                          <div key={detailIdx} className="flex items-center gap-3">
-                            <div className="w-2 h-2 bg-gold rounded-full flex-shrink-0"></div>
-                            <span className="text-charcoal">{detail}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="text-lg font-serif font-bold text-charcoal mb-4">
-                        学べる技法
-                      </h4>
-                      <div className="grid grid-cols-2 gap-3">
-                        {program.techniques.map((technique, techIdx) => (
-                          <div
-                            key={techIdx}
-                            className="bg-white rounded-lg p-3 border border-light-gray text-center"
-                          >
-                            <span className="text-charcoal text-sm font-medium">
-                              {technique}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Educational Philosophy Section */}
-      <section className="py-24 bg-cream">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-serif font-bold text-charcoal mb-12 text-center">
-            教育理念
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white rounded-lg p-8 border border-light-gray">
-              <div className="flex items-start gap-4 mb-4">
-                <div className="text-4xl">💡</div>
-                <h3 className="text-2xl font-serif font-bold text-charcoal">
-                  創造性の育成
-                </h3>
-              </div>
-              <p className="text-charcoal leading-relaxed">
-                各自の個性と創造性を尊重し、自由な表現を促進する教育を行っています。
-              </p>
-            </div>
-
-            <div className="bg-white rounded-lg p-8 border border-light-gray">
-              <div className="flex items-start gap-4 mb-4">
-                <div className="text-4xl">🎯</div>
-                <h3 className="text-2xl font-serif font-bold text-charcoal">
-                  段階的な学習
-                </h3>
-              </div>
-              <p className="text-charcoal leading-relaxed">
-                基礎から応用まで、段階的に学べるカリキュラムを用意しています。
-              </p>
-            </div>
-
-            <div className="bg-white rounded-lg p-8 border border-light-gray">
-              <div className="flex items-start gap-4 mb-4">
-                <div className="text-4xl">🤝</div>
-                <h3 className="text-2xl font-serif font-bold text-charcoal">
-                  コミュニティ形成
-                </h3>
-              </div>
-              <p className="text-charcoal leading-relaxed">
-                同じ志を持つ人々が集い、交流できるコミュニティを形成しています。
-              </p>
-            </div>
-
-            <div className="bg-white rounded-lg p-8 border border-light-gray">
-              <div className="flex items-start gap-4 mb-4">
-                <div className="text-4xl">🌟</div>
-                <h3 className="text-2xl font-serif font-bold text-charcoal">
-                  文化発信
-                </h3>
-              </div>
-              <p className="text-charcoal leading-relaxed">
-                展示会やイベントを通じて、芸術と文化を社会に発信しています。
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Programs & Activities Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-serif font-bold text-charcoal mb-12 text-center">
-            プログラムと活動
-          </h2>
-
-          <div className="space-y-8">
-            <div className="flex gap-6">
-              <div className="flex-shrink-0">
-                <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gold text-charcoal font-bold">
-                  1
-                </div>
-              </div>
-              <div>
-                <h3 className="text-xl font-serif font-bold text-charcoal mb-2">
-                  定期クラス
-                </h3>
-                <p className="text-charcoal">
-                  週1回から複数回まで、ご自身のペースで学べる定期クラスを開設しています。
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-6">
-              <div className="flex-shrink-0">
-                <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gold text-charcoal font-bold">
-                  2
-                </div>
-              </div>
-              <div>
-                <h3 className="text-xl font-serif font-bold text-charcoal mb-2">
-                  ワークショップ
-                </h3>
-                <p className="text-charcoal">
-                  特定のテーマや技法に焦点を当てた、短期集中ワークショップを開催しています。
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-6">
-              <div className="flex-shrink-0">
-                <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gold text-charcoal font-bold">
-                  3
-                </div>
-              </div>
-              <div>
-                <h3 className="text-xl font-serif font-bold text-charcoal mb-2">
-                  展示会
-                </h3>
-                <p className="text-charcoal">
-                  生徒の作品を展示する展示会を定期的に開催し、成果を発表する機会を提供しています。
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-6">
-              <div className="flex-shrink-0">
-                <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gold text-charcoal font-bold">
-                  4
-                </div>
-              </div>
-              <div>
-                <h3 className="text-xl font-serif font-bold text-charcoal mb-2">
-                  アート鑑賞
-                </h3>
-                <p className="text-charcoal">
-                  美術館やギャラリーへの訪問、著名アーティストの作品鑑賞を通じて、芸術への理解を深めています。
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-6">
-              <div className="flex-shrink-0">
-                <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gold text-charcoal font-bold">
-                  5
-                </div>
-              </div>
-              <div>
-                <h3 className="text-xl font-serif font-bold text-charcoal mb-2">
-                  交流イベント
-                </h3>
-                <p className="text-charcoal">
-                  生徒同士の交流や、他の教室との交流イベントを開催しています。
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Instructors Section */}
-      <section className="py-24 bg-cream">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-serif font-bold text-charcoal mb-12 text-center">
-            講師について
-          </h2>
-
-          <div className="bg-white rounded-lg p-8 border border-light-gray">
-            <p className="text-lg text-charcoal leading-relaxed mb-6">
-              当教室の講師は、芸術大学出身や、国内外での展示会経験を持つ、経験豊富なアーティストです。
-            </p>
-            <p className="text-lg text-charcoal leading-relaxed mb-6">
-              各講師は、生徒一人ひとりの個性と目標を理解し、丁寧で親身な指導を心がけています。
-            </p>
-            <p className="text-lg text-charcoal leading-relaxed">
-              初心者から上級者まで、すべてのレベルの生徒に対応できる、高い教育スキルを持っています。
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-charcoal text-cream">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-serif font-bold mb-6">
-            ご質問やご相談はお気軽に
-          </h2>
-          <Link
-            href="/contact"
-            className="inline-block px-8 py-3 bg-gold text-charcoal font-medium rounded-lg hover:bg-cream transition-all"
-          >
-            お問い合わせ
-          </Link>
-        </div>
-      </section>
-    </div>
-  )
+  const { language } = useLanguage()
+  return <BusinessDetailPage content={CULTURE_CONTENT[language]} />
 }

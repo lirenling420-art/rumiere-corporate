@@ -1,28 +1,42 @@
 'use client'
 
 import React, { createContext, useContext, useState } from 'react'
-import { translations, Language, TranslationKey } from '@/lib/translations'
+import { translations, Language } from '@/lib/translations'
+import { companyTranslations } from '@/lib/companyTranslations'
+import { businessPageTranslations } from '@/lib/businessPageTranslations'
+import { contactPageTranslations } from '@/lib/contactPageTranslations'
+import { beautyPageTranslations } from '@/lib/beautyPageTranslations'
 
 interface LanguageContextType {
   language: Language
   setLanguage: (lang: Language) => void
-  t: (key: TranslationKey, replacements?: Record<string, string | number>) => string
+  t: (key: string, replacements?: Record<string, string | number>) => string
 }
+
+export type LanguageContent<T> = Record<Language, T>
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguage] = useState<Language>('ja')
 
-  const t = (key: TranslationKey, replacements?: Record<string, string | number>): string => {
-    let text: string = translations[language][key] as string || key
-    
+  const mergedTranslations = {
+    ...translations[language],
+    ...companyTranslations[language],
+    ...businessPageTranslations[language],
+    ...contactPageTranslations[language],
+    ...beautyPageTranslations[language],
+  } as Record<string, string>
+
+  const t = (key: string, replacements?: Record<string, string | number>): string => {
+    let text = mergedTranslations[key] || key
+
     if (replacements) {
       Object.entries(replacements).forEach(([placeholder, value]) => {
         text = text.replace(`{${placeholder}}`, String(value))
       })
     }
-    
+
     return text
   }
 

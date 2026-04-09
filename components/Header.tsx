@@ -54,7 +54,7 @@ export default function Header() {
           <button
             className="md:hidden p-2"
             onClick={() => setIsOpen(!isOpen)}
-            aria-label="メニュー"
+            aria-label={t('header.menu')}
           >
             <svg
               className="w-6 h-6 text-charcoal"

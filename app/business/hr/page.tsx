@@ -1,272 +1,69 @@
-import Link from 'next/link'
+'use client'
+
+import BusinessDetailPage from '@/components/BusinessDetailPage'
+import { useLanguage, LanguageContent } from '@/contexts/LanguageContext'
+
+const HR_CONTENT: LanguageContent<Parameters<typeof BusinessDetailPage>[0]['content']> = {
+  ja: {
+    heroTitle: '人材・業務支援関連事業', heroSubtitle: '人材と業務支援を通じて、企業の成長をサポートします', heroGradient: 'from-green-100 via-cream to-emerald-100',
+    overview: ['人材・業務支援関連事業では、労働者派遣事業、有料職業紹介事業、そしてビル・マンション・店舗・工場の清掃業務を通じて、企業の人材ニーズと業務効率化をサポートしています。','質の高い人材の確保から、施設管理まで、企業の様々なニーズに対応することで、お客様の事業成長に貢献しています。'],
+    servicesLabel: 'サービス内容',
+    services: [
+      { title: '労働者派遣事業', description: '企業のニーズに合わせた、質の高い人材派遣サービスを提供します。', points: ['一般事務派遣', '営業派遣', '技術派遣', '製造業派遣', 'コールセンター派遣'], icon: '👔' },
+      { title: '有料職業紹介事業', description: '求職者と企業のマッチングを通じて、最適な人材配置を実現します。', points: ['正社員紹介', '契約社員紹介', 'キャリアコンサルティング', '適性診断', 'スキルアップ支援'], icon: '🤝' },
+      { title: 'ビル・マンション・店舗・工場清掃業務', description: '高い専門性と丁寧さで、施設の美しさと衛生を保ちます。', points: ['ビル清掃', 'マンション清掃', '店舗清掃', '工場清掃', '定期メンテナンス'], icon: '🧹' },
+    ],
+    featureTitle: '企業様へのメリット',
+    featureItems: [
+      { title: '採用コストの削減', description: '採用活動にかかる時間とコストを大幅に削減できます。' },
+      { title: '柔軟な人員調整', description: '業務量の変動に合わせて、柔軟に人員を調整できます。' },
+      { title: '優秀な人材へのアクセス', description: '当社の厳選された人材プールから、優秀な人材を確保できます。' },
+      { title: '業務効率化', description: '清掃業務などの非コア業務をアウトソースし、コア業務に集中できます。' },
+      { title: 'リスク軽減', description: '雇用契約に関するリスクを軽減できます。' },
+    ],
+    ctaTitle: 'ご質問やご相談はお気軽に', ctaButton: 'お問い合わせ',
+  },
+  en: {
+    heroTitle: 'Human Resources & Business Support', heroSubtitle: 'Supporting corporate growth through people and operational support.', heroGradient: 'from-green-100 via-cream to-emerald-100',
+    overview: ['We support clients’ workforce needs and operational efficiency through staffing, paid recruitment, and cleaning services for buildings, apartments, stores, and factories.','From securing quality talent to managing facilities, we respond to a wide range of corporate needs and contribute to business growth.'],
+    servicesLabel: 'Service Details',
+    services: [
+      { title: 'Staffing Services', description: 'We provide high-quality staffing services tailored to each company’s needs.', points: ['Office staffing', 'Sales staffing', 'Technical staffing', 'Manufacturing staffing', 'Call center staffing'], icon: '👔' },
+      { title: 'Paid Recruitment Services', description: 'We achieve optimal talent placement by matching job seekers with companies.', points: ['Permanent placement', 'Contract placement', 'Career consulting', 'Aptitude assessment', 'Skill-up support'], icon: '🤝' },
+      { title: 'Cleaning Services for Buildings, Apartments, Stores, and Factories', description: 'We maintain cleanliness and hygiene in facilities with professionalism and care.', points: ['Building cleaning', 'Apartment cleaning', 'Store cleaning', 'Factory cleaning', 'Regular maintenance'], icon: '🧹' },
+    ],
+    featureTitle: 'Benefits for Corporate Clients',
+    featureItems: [
+      { title: 'Reduced Hiring Costs', description: 'You can significantly reduce time and cost involved in recruitment activities.' },
+      { title: 'Flexible Workforce Adjustment', description: 'Staffing levels can be adjusted flexibly according to workload fluctuations.' },
+      { title: 'Access to Excellent Talent', description: 'We help secure capable personnel from our carefully selected talent pool.' },
+      { title: 'Operational Efficiency', description: 'Non-core functions such as cleaning can be outsourced so teams can focus on core operations.' },
+      { title: 'Risk Reduction', description: 'Employment-related risks can be reduced through appropriate support structures.' },
+    ],
+    ctaTitle: 'Questions or inquiries are always welcome.', ctaButton: 'Contact Us',
+  },
+  zh: {
+    heroTitle: '人力与业务支援相关业务', heroSubtitle: '通过人才与业务支援，助力企业成长。', heroGradient: 'from-green-100 via-cream to-emerald-100',
+    overview: ['我们通过劳务派遣、收费职业介绍，以及楼宇、公寓、店铺和工厂清扫业务，支持企业的人才需求与运营效率提升。','从确保高质量人才到设施管理，我们通过满足企业多样需求，推动客户事业成长。'],
+    servicesLabel: '服务内容',
+    services: [
+      { title: '劳务派遣业务', description: '根据企业需求提供高质量的人才派遣服务。', points: ['一般事务派遣', '营业派遣', '技术派遣', '制造业派遣', '呼叫中心派遣'], icon: '👔' },
+      { title: '收费职业介绍业务', description: '通过为求职者与企业进行匹配，实现最佳人才配置。', points: ['正式员工介绍', '合同员工介绍', '职业咨询', '适性诊断', '技能提升支持'], icon: '🤝' },
+      { title: '楼宇、公寓、店铺、工厂清扫业务', description: '以专业与细致维护设施的整洁与卫生。', points: ['楼宇清扫', '公寓清扫', '店铺清扫', '工厂清扫', '定期维护'], icon: '🧹' },
+    ],
+    featureTitle: '为企业带来的优势',
+    featureItems: [
+      { title: '降低招聘成本', description: '可大幅降低招聘活动所需的时间与成本。' },
+      { title: '灵活调整人力', description: '可根据业务量变化灵活配置人员。' },
+      { title: '获得优秀人才', description: '可从我们精选的人才库中获取优秀人才。' },
+      { title: '提高运营效率', description: '可将清洁等非核心业务外包，使团队专注核心业务。' },
+      { title: '降低风险', description: '可减轻与雇佣合同相关的风险。' },
+    ],
+    ctaTitle: '如有疑问或咨询，欢迎随时联系我们。', ctaButton: '联系我们',
+  },
+}
 
 export default function HRPage() {
-  const services = [
-    {
-      title: '労働者派遣事業',
-      description: '企業のニーズに合わせた、質の高い人材派遣サービスを提供します。',
-      details: [
-        '一般事務派遣',
-        '営業派遣',
-        '技術派遣',
-        '製造業派遣',
-        'コールセンター派遣',
-      ],
-      icon: '👔',
-    },
-    {
-      title: '有料職業紹介事業',
-      description: '求職者と企業のマッチングを通じて、最適な人材配置を実現します。',
-      details: [
-        '正社員紹介',
-        '契約社員紹介',
-        'キャリアコンサルティング',
-        '適性診断',
-        'スキルアップ支援',
-      ],
-      icon: '🤝',
-    },
-    {
-      title: 'ビル・マンション・店舗・工場清掃業務',
-      description: '高い専門性と丁寧さで、施設の美しさと衛生を保ちます。',
-      details: [
-        'ビル清掃',
-        'マンション清掃',
-        '店舗清掃',
-        '工場清掃',
-        '定期メンテナンス',
-      ],
-      icon: '🧹',
-    },
-  ]
-
-  return (
-    <div className="bg-cream">
-      {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-green-100 via-cream to-emerald-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-5xl md:text-6xl font-serif font-bold text-charcoal mb-4">
-              人材・業務支援関連事業
-            </h1>
-            <div className="w-16 h-1 bg-gold mx-auto mb-6"></div>
-            <p className="text-xl text-charcoal">
-              人材と業務支援を通じて、企業の成長をサポートします
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Overview Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-          <p className="text-lg text-charcoal leading-relaxed">
-            人材・業務支援関連事業では、労働者派遣事業、有料職業紹介事業、そしてビル・マンション・店舗・工場の清掃業務を通じて、企業の人材ニーズと業務効率化をサポートしています。
-          </p>
-          <p className="text-lg text-charcoal leading-relaxed mt-6">
-            質の高い人材の確保から、施設管理まで、企業の様々なニーズに対応することで、お客様の事業成長に貢献しています。
-          </p>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-8">
-            {services.map((service, idx) => (
-              <div
-                key={idx}
-                className="bg-gradient-to-r from-beige to-cream rounded-lg overflow-hidden border border-light-gray hover:border-gold transition-colors hover:shadow-lg"
-              >
-                <div className="p-8">
-                  <div className="flex items-start gap-6 mb-6">
-                    <div className="text-5xl flex-shrink-0">{service.icon}</div>
-                    <div className="flex-grow">
-                      <h3 className="text-3xl font-serif font-bold text-charcoal mb-3">
-                        {service.title}
-                      </h3>
-                      <p className="text-lg text-charcoal leading-relaxed">
-                        {service.description}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {service.details.map((detail, detailIdx) => (
-                      <div key={detailIdx} className="flex items-center gap-3 p-3 bg-white rounded-lg border border-light-gray">
-                        <div className="w-2 h-2 bg-gold rounded-full flex-shrink-0"></div>
-                        <span className="text-charcoal text-sm">{detail}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Our Approach Section */}
-      <section className="py-24 bg-cream">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-serif font-bold text-charcoal mb-12 text-center">
-            ルミエールのアプローチ
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white rounded-lg p-8 border border-light-gray">
-              <div className="flex items-start gap-4 mb-4">
-                <div className="text-4xl">🎯</div>
-                <h3 className="text-2xl font-serif font-bold text-charcoal">
-                  ニーズ分析
-                </h3>
-              </div>
-              <p className="text-charcoal leading-relaxed">
-                企業の具体的なニーズを丁寧にヒアリングし、最適なソリューションを提案します。
-              </p>
-            </div>
-
-            <div className="bg-white rounded-lg p-8 border border-light-gray">
-              <div className="flex items-start gap-4 mb-4">
-                <div className="text-4xl">👥</div>
-                <h3 className="text-2xl font-serif font-bold text-charcoal">
-                  人材マッチング
-                </h3>
-              </div>
-              <p className="text-charcoal leading-relaxed">
-                求職者と企業の適性を見極め、最適なマッチングを実現します。
-              </p>
-            </div>
-
-            <div className="bg-white rounded-lg p-8 border border-light-gray">
-              <div className="flex items-start gap-4 mb-4">
-                <div className="text-4xl">📈</div>
-                <h3 className="text-2xl font-serif font-bold text-charcoal">
-                  継続的なサポート
-                </h3>
-              </div>
-              <p className="text-charcoal leading-relaxed">
-                配置後も継続的にサポートし、長期的な関係構築を目指します。
-              </p>
-            </div>
-
-            <div className="bg-white rounded-lg p-8 border border-light-gray">
-              <div className="flex items-start gap-4 mb-4">
-                <div className="text-4xl">✨</div>
-                <h3 className="text-2xl font-serif font-bold text-charcoal">
-                  品質保証
-                </h3>
-              </div>
-              <p className="text-charcoal leading-relaxed">
-                高い品質基準を維持し、お客様の満足度を最優先にしています。
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-serif font-bold text-charcoal mb-12 text-center">
-            企業様へのメリット
-          </h2>
-
-          <div className="space-y-8">
-            <div className="flex gap-6">
-              <div className="flex-shrink-0">
-                <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gold text-charcoal font-bold">
-                  1
-                </div>
-              </div>
-              <div>
-                <h3 className="text-xl font-serif font-bold text-charcoal mb-2">
-                  採用コストの削減
-                </h3>
-                <p className="text-charcoal">
-                  採用活動にかかる時間とコストを大幅に削減できます。
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-6">
-              <div className="flex-shrink-0">
-                <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gold text-charcoal font-bold">
-                  2
-                </div>
-              </div>
-              <div>
-                <h3 className="text-xl font-serif font-bold text-charcoal mb-2">
-                  柔軟な人員調整
-                </h3>
-                <p className="text-charcoal">
-                  業務量の変動に合わせて、柔軟に人員を調整できます。
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-6">
-              <div className="flex-shrink-0">
-                <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gold text-charcoal font-bold">
-                  3
-                </div>
-              </div>
-              <div>
-                <h3 className="text-xl font-serif font-bold text-charcoal mb-2">
-                  優秀な人材へのアクセス
-                </h3>
-                <p className="text-charcoal">
-                  当社の厳選された人材プールから、優秀な人材を確保できます。
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-6">
-              <div className="flex-shrink-0">
-                <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gold text-charcoal font-bold">
-                  4
-                </div>
-              </div>
-              <div>
-                <h3 className="text-xl font-serif font-bold text-charcoal mb-2">
-                  業務効率化
-                </h3>
-                <p className="text-charcoal">
-                  清掃業務などの非コア業務をアウトソースし、コア業務に集中できます。
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-6">
-              <div className="flex-shrink-0">
-                <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gold text-charcoal font-bold">
-                  5
-                </div>
-              </div>
-              <div>
-                <h3 className="text-xl font-serif font-bold text-charcoal mb-2">
-                  リスク軽減
-                </h3>
-                <p className="text-charcoal">
-                  雇用契約に関するリスクを軽減できます。
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-charcoal text-cream">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-serif font-bold mb-6">
-            ご質問やご相談はお気軽に
-          </h2>
-          <Link
-            href="/contact"
-            className="inline-block px-8 py-3 bg-gold text-charcoal font-medium rounded-lg hover:bg-cream transition-all"
-          >
-            お問い合わせ
-          </Link>
-        </div>
-      </section>
-    </div>
-  )
+  const { language } = useLanguage()
+  return <BusinessDetailPage content={HR_CONTENT[language]} />
 }

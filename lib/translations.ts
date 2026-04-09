@@ -2,12 +2,13 @@ export const translations = {
   ja: {
     // Header & Navigation
     'header.brand': '株式会社ルミエール',
-    'header.brand_sub': 'Rumiere Co., Ltd.',
+    'header.brand_sub': 'Lumiere Co., Ltd.',
     'header.nav.home': 'トップ',
     'header.nav.company': '会社概要',
     'header.nav.business': '事業内容',
     'header.nav.contact': 'お問い合わせ',
     'header.lang': '言語',
+    'header.menu': 'メニュー',
 
     // Hero Section
     'hero.title': '株式会社ルミエール',
@@ -30,6 +31,7 @@ export const translations = {
     'business.subtitle': '多角的な事業展開で、社会のあらゆるニーズに応えています',
     'business.view_all': '全事業を見る',
     'business.view_more': '詳しく見る',
+    'business.back': '事業一覧へ戻る',
 
     // Business Categories - Titles & Descriptions
     'business.beauty.title': '美容・サロン',
@@ -79,16 +81,17 @@ export const translations = {
   },
   en: {
     // Header & Navigation
-    'header.brand': 'Rumiere',
-    'header.brand_sub': 'Rumiere Co., Ltd.',
+    'header.brand': 'Lumiere',
+    'header.brand_sub': 'Lumiere Co., Ltd.',
     'header.nav.home': 'Home',
     'header.nav.company': 'Company',
     'header.nav.business': 'Business',
     'header.nav.contact': 'Contact',
     'header.lang': 'Language',
+    'header.menu': 'Menu',
 
     // Hero Section
-    'hero.title': 'Rumiere',
+    'hero.title': 'Lumiere',
     'hero.subtitle': 'Creating value for society through diverse business operations',
     'hero.cta1': 'View Company Overview',
     'hero.cta2': 'Explore Business',
@@ -108,6 +111,7 @@ export const translations = {
     'business.subtitle': 'Meeting diverse needs of society through diverse business operations',
     'business.view_all': 'View All Businesses',
     'business.view_more': 'Learn More',
+    'business.back': 'Back to Business',
 
     // Business Categories - Titles & Descriptions
     'business.beauty.title': 'Beauty & Salon',
@@ -135,7 +139,7 @@ export const translations = {
     // CTA Section
     'cta.title': 'Questions or Inquiries?',
     'cta.subtitle': 'Feel free to contact us',
-    'cta.desc': 'We are always ready to receive inquiries and consultations from Rumiere',
+    'cta.desc': 'We are always ready to receive inquiries and consultations from Lumiere',
     'cta.button': 'Contact Us',
 
     // Contact Page - Access
@@ -148,22 +152,23 @@ export const translations = {
     'contact.access.landmarks_desc': 'We will provide detailed directions and landmarks information when you contact us. You can also search by address on Google Map.',
 
     // Footer
-    'footer.company': 'Rumiere Co., Ltd.',
+    'footer.company': 'Lumiere Co., Ltd.',
     'footer.desc': 'We operate diverse businesses including beauty salons, retail and lifestyle, transportation and logistics.',
     'footer.sitemap': 'Sitemap',
     'footer.categories': 'Business Categories',
     'footer.other': 'Other Businesses',
-    'footer.copyright': '© {year} Rumiere Co., Ltd. All rights reserved.',
+    'footer.copyright': '© {year} Lumiere Co., Ltd. All rights reserved.',
   },
   zh: {
     // Header & Navigation
     'header.brand': '株式会社ルミエール',
-    'header.brand_sub': 'Rumiere Co., Ltd.',
+    'header.brand_sub': 'Lumiere Co., Ltd.',
     'header.nav.home': '首页',
     'header.nav.company': '公司概况',
     'header.nav.business': '业务',
     'header.nav.contact': '联系我们',
     'header.lang': '语言',
+    'header.menu': '菜单',
 
     // Hero Section
     'hero.title': '株式会社ルミエール',
@@ -186,6 +191,7 @@ export const translations = {
     'business.subtitle': '通过多元化业务满足社会的各种需求',
     'business.view_all': '查看所有业务',
     'business.view_more': '了解更多',
+    'business.back': '返回业务一览',
 
     // Business Categories - Titles & Descriptions
     'business.beauty.title': '美容与沙龙',

@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 type SalonImageCarouselProps = {
   images: string[]
@@ -13,6 +14,7 @@ export default function SalonImageCarousel({
   images,
   intervalMs = 4000,
 }: SalonImageCarouselProps) {
+  const { t } = useLanguage()
   const [activeIndex, setActiveIndex] = useState(0)
   const [errored, setErrored] = useState<Record<number, boolean>>({})
 
@@ -33,8 +35,8 @@ export default function SalonImageCarousel({
   if (!images.length) {
     return (
       <div className="h-full w-full flex flex-col items-center justify-center text-center px-6 py-10 bg-gradient-to-br from-beige to-cream">
-        <p className="text-charcoal font-serif text-lg mb-2">店舗外観・店内写真</p>
-        <p className="text-soft-gray text-sm">画像準備中</p>
+        <p className="text-charcoal font-serif text-lg mb-2">{t('beauty.page.carousel_fallback_title')}</p>
+        <p className="text-soft-gray text-sm">{t('beauty.page.carousel_fallback_subtitle')}</p>
       </div>
     )
   }
@@ -51,7 +53,7 @@ export default function SalonImageCarousel({
           {!errored[idx] ? (
             <Image
               src={src}
-              alt={`Beauty Salon Ryoko 店舗写真 ${idx + 1}`}
+              alt={`${t('beauty.page.nail_title')} ${idx + 1}`}
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -59,8 +61,8 @@ export default function SalonImageCarousel({
             />
           ) : (
             <div className="h-full w-full flex flex-col items-center justify-center text-center px-6 py-10 bg-gradient-to-br from-beige to-cream">
-              <p className="text-charcoal font-serif text-lg mb-2">店舗外観・店内写真</p>
-              <p className="text-soft-gray text-sm">画像準備中</p>
+              <p className="text-charcoal font-serif text-lg mb-2">{t('beauty.page.carousel_fallback_title')}</p>
+              <p className="text-soft-gray text-sm">{t('beauty.page.carousel_fallback_subtitle')}</p>
             </div>
           )}
         </div>
@@ -72,7 +74,7 @@ export default function SalonImageCarousel({
             type="button"
             onClick={goPrev}
             className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-white/85 p-2 text-charcoal shadow-sm hover:bg-white"
-            aria-label="前の写真"
+            aria-label={t('beauty.page.carousel_prev')}
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
@@ -80,7 +82,7 @@ export default function SalonImageCarousel({
             type="button"
             onClick={goNext}
             className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-white/85 p-2 text-charcoal shadow-sm hover:bg-white"
-            aria-label="次の写真"
+            aria-label={t('beauty.page.carousel_next')}
           >
             <ChevronRight className="h-4 w-4" />
           </button>
@@ -91,7 +93,7 @@ export default function SalonImageCarousel({
                 key={idx}
                 type="button"
                 onClick={() => goTo(idx)}
-                aria-label={`写真 ${idx + 1} を表示`}
+                aria-label={t('beauty.page.carousel_dot', { index: idx + 1 })}
                 className={`h-1.5 w-1.5 rounded-full transition-all ${
                   idx === activeIndex ? 'bg-cream w-4' : 'bg-cream/60'
                 }`}
